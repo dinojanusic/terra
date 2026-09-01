@@ -37,6 +37,8 @@ GitHub Pages, or plain nginx).
 - **Countdown** to the opening moment, with a per-digit tick animation.
 - **HR / EN toggle**, persisted in `localStorage`.
 - **Signup form** with client-side validation.
+- **No-JS fallback** — a `<noscript>` block in `<head>` drops the preloader,
+  renders every animated element in its final state and hides the countdown.
 - `prefers-reduced-motion` is respected throughout: all motion, the cursor,
   the glow and the grain switch off, and content renders in its final state.
 
