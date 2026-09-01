@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Terra Restoran — Uskoro otvaramo</title>
-<meta name="description" content="Terra restoran uskoro otvara vrata u Zagrebu. Sezonske namirnice, otvorena vatra i vino iz susjedstva." />
-<meta name="theme-color" content="#f3f2f2" />
+<meta name="description" content="Terra restoran uskoro otvara vrata u Čakovcu. Sezonske namirnice, otvorena vatra i vino iz susjedstva." />
+<meta name="theme-color" content="#211d19" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Terra Restoran — Uskoro otvaramo" />
@@ -25,7 +25,7 @@
   .reveal,.line{ opacity:1 !important; transform:none !important; }
   .hr--draw{ transform:none !important; }
   .nav__mark,.nav__word{ opacity:1 !important; transform:none !important; }
-  .count{ display:none !important; }
+  .count,.grain,.cursor,.glow{ display:none !important; }
 </style></noscript>
 
 <script type="application/ld+json">
@@ -39,21 +39,25 @@
   "logo": "assets/img/terra-logo.png",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Ilica 1",
-    "addressLocality": "Zagreb",
-    "postalCode": "10000",
+    "streetAddress": "Trg Republike 1",
+    "addressLocality": "Čakovec",
+    "postalCode": "40000",
     "addressCountry": "HR"
   },
   "email": "hello@terra-restoran.hr",
-  "telephone": "+385 1 000 0000",
+  "telephone": "+385 40 000 000",
   "openingHours": "We-Su 17:00-24:00"
 }
 </script>
 </head>
 <body>
 
+<canvas class="grain" id="grain" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
 <div class="loader" id="loader" aria-hidden="true">
-  <img class="loader__mark" src="assets/img/terra-mark.png" alt="" width="336" height="256" />
+  <img class="loader__mark" src="assets/img/terra-mark-reverse.png" alt="" width="336" height="256" />
   <div class="loader__bar"><span id="loaderBar"></span></div>
 </div>
 
@@ -62,7 +66,7 @@
 <!-- ── Header ─────────────────────────────────────────────── -->
 <header class="nav" id="nav">
   <a class="nav__brand" href="#main" aria-label="Terra Restoran">
-    <img class="nav__mark" src="assets/img/terra-mark.png" alt="" width="336" height="256" />
+    <img class="nav__mark" src="assets/img/terra-mark-reverse.png" alt="" width="336" height="256" />
     <span class="nav__word">Terra</span>
   </a>
 
@@ -84,13 +88,17 @@
 
 <!-- ── Hero ───────────────────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="hero__ground" aria-hidden="true"></div>
+  <div class="hero__ground" aria-hidden="true">
+    <div class="hero__layer hero__layer--wash" data-depth="0.08"></div>
+    <div class="hero__layer hero__layer--ember" data-depth="0.16"></div>
+  </div>
+  <div class="hero__vignette" aria-hidden="true"></div>
 
   <div class="hero__inner">
-    <p class="hero__kicker reveal" data-hr="Zagreb · Otvaramo 15. studenoga 2026." data-en="Zagreb · Opening 15 November 2026.">Zagreb · Otvaramo 15. studenoga 2026.</p>
+    <p class="hero__kicker reveal" data-hr="Čakovec · Otvaramo 15. studenoga 2026." data-en="Čakovec · Opening 15 November 2026.">Čakovec · Otvaramo 15. studenoga 2026.</p>
 
     <img class="hero__logo reveal" data-delay="80" id="heroLogo"
-         src="assets/img/terra-logo.png" width="575" height="404"
+         src="assets/img/terra-logo-reverse.png" width="575" height="404"
          alt="Terra Restoran" fetchpriority="high" />
 
     <h1 class="hero__title reveal" data-delay="200"><span data-split-lines
@@ -127,8 +135,14 @@
 <section class="sec" id="story">
   <div class="sec__inner story__grid">
     <figure class="story__figure reveal">
-      <div class="plate"></div>
-      <figcaption data-hr="Vrt našeg dobavljača · svibanj" data-en="Our grower's garden · May">Vrt našeg dobavljača · svibanj</figcaption>
+      <div class="frame" data-tilt>
+        <img src="assets/img/interior-800.webp"
+             srcset="assets/img/interior-800.webp 800w, assets/img/interior-1400.webp 1400w, assets/img/interior.webp 2000w"
+             sizes="(min-width:900px) 46vw, 92vw"
+             width="2000" height="1763" loading="lazy" decoding="async"
+             alt="Blagovaonica restorana Terra: šank s toplim svjetlom, maslina u prostoru i logotip na drvenoj stijeni." />
+        <span class="frame__tag" data-hr="Naš prostor · Čakovec" data-en="Our room · Čakovec">Naš prostor · Čakovec</span>
+      </div>
     </figure>
 
     <div>
@@ -181,7 +195,7 @@
 </section>
 
 <!-- ── Countdown + signup (reverse lockup on the kit's dark ground) ── -->
-<section class="notify on-dark" id="notify" data-open="2026-11-15T18:00:00+01:00">
+<section class="notify" id="notify" data-open="2026-11-15T18:00:00+01:00">
   <div class="notify__inner">
     <img class="notify__logo reveal" src="assets/img/terra-logo-reverse.png" width="575" height="404" alt="" />
     <p class="kicker reveal" data-delay="60" data-hr="Vrata se otvaraju" data-en="The doors open">Vrata se otvaraju</p>
@@ -215,7 +229,7 @@
   <div class="foot__grid">
     <div>
       <h6 data-hr="Adresa" data-en="Address">Adresa</h6>
-      <p>Ilica 1<br />10000 Zagreb, HR</p>
+      <p>Trg Republike 1<br />40000 Čakovec, HR</p>
     </div>
     <div>
       <h6 data-hr="Radno vrijeme" data-en="Hours">Radno vrijeme</h6>
@@ -223,7 +237,7 @@
     </div>
     <div>
       <h6 data-hr="Kontakt" data-en="Contact">Kontakt</h6>
-      <p><a href="mailto:hello@terra-restoran.hr">hello@terra-restoran.hr</a><br /><a href="tel:+38510000000">+385 1 000 0000</a></p>
+      <p><a href="mailto:hello@terra-restoran.hr">hello@terra-restoran.hr</a><br /><a href="tel:+38540000000">+385 40 000 000</a></p>
     </div>
     <div>
       <h6 data-hr="Pratite nas" data-en="Follow">Pratite nas</h6>

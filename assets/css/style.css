@@ -31,12 +31,24 @@
 
 /* ── Tokens ───────────────────────────────────────────────── */
 
+/* The kit ships a light "paper" theme. This page runs its dark counterpart,
+   built from the kit's own reverse-lockup ground (#2b2620) and the interior
+   render, with the roles swapped rather than re-invented:
+
+     kit (light)                     here (dark)
+     --color-bg      #f3f2f2   →     #211d19   deep soil, a step under 2b2620
+     --color-surface #eae9e9   →     #2b2620   the kit's reverse ground
+     --color-text    #201e1d   →     #f3f2f2   the kit's paper, now the ink
+     --color-accent  #8a4a2b   →     #c9743f   trunk, lifted to carry on dark
+     --color-accent-2 #6f7a52  →     #93a06f   canopy, likewise lifted
+
+   Spacing, radii, type and components are unchanged from the kit. */
+
 :root{
-  /* kit: ground and ink */
-  --color-bg: #f3f2f2;
-  --color-surface: #eae9e9;
-  --color-text: #201e1d;
-  --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
+  --color-bg: #211d19;
+  --color-surface: #2b2620;
+  --color-text: #f3f2f2;
+  --color-divider: color-mix(in srgb, #f3f2f2 20%, transparent);
 
   /* kit: neutral ramp (OKLCH, one shared lightness scale) */
   --color-neutral-100:#f8f4f4; --color-neutral-200:#eae7e7;
@@ -45,18 +57,18 @@
   --color-neutral-700:#605d5d; --color-neutral-800:#444141;
   --color-neutral-900:#2d2b2b;
 
-  /* 3C "Terracotta trunk" colorway — the accent roles for this brand */
-  --color-accent: #8a4a2b;     /* trunk    */
-  --color-accent-2: #6f7a52;   /* canopy   */
-  --terra-ink: #3b3128;        /* logo ink */
-  --terra-ground: #2b2620;     /* reverse-lockup ground, as used in the kit */
+  /* 3C "Terracotta trunk" colorway, at dark-ground luminance */
+  --color-accent: #c9743f;     /* trunk, lifted   */
+  --color-accent-2: #93a06f;   /* canopy, lifted  */
+  --terra-trunk: #8a4a2b;      /* the kit's own trunk, kept for deep fills */
+  --terra-canopy: #6f7a52;
+  --terra-ink: #3b3128;
+  --terra-ground: #2b2620;     /* the kit's reverse-lockup ground */
 
-  /* EXTENSION: hover/active steps for the trunk accent, matched to the
-     kit's own ramp construction (darker at 600/700, tint at 100). */
-  --color-accent-100:#f7efe9;
-  --color-accent-200:#ecd8c9;
-  --color-accent-600:#743c22;
-  --color-accent-700:#5c2f1a;
+  /* hover/active steps, built the way the kit builds its ramp */
+  --color-accent-600:#dc8a55;
+  --color-accent-700:#e8a071;
+  --color-accent-wash: color-mix(in srgb, #c9743f 12%, transparent);
 
   /* kit: type */
   --font-heading:"Archivo", system-ui, sans-serif;
@@ -72,13 +84,12 @@
   /* kit: corners are square */
   --radius-sm:0px; --radius-md:0px; --radius-lg:0px;
 
-  /* kit: elevation */
-  --shadow-sm:0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
-  --shadow-md:0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
-  --shadow-lg:0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+  /* kit: elevation, deepened for a dark ground */
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 3px 10px rgba(0,0,0,.45);
+  --shadow-lg:0 12px 32px rgba(0,0,0,.55);
 
-  /* EXTENSION: page rhythm + display step above the kit's h1 (42px),
-     needed for a landing hero; same family, weight and tracking logic. */
+  /* EXTENSION: page rhythm + display step above the kit's h1 (42px) */
   --gut: clamp(20px, 5vw, 64px);
   --sec: clamp(72px, 11vw, 128px);
   --font-display: clamp(34px, 5.2vw, 68px);
@@ -91,7 +102,7 @@
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 body{
-  margin:0; background:var(--color-bg); color:var(--color-text);
+  margin:0; background:var(--color-bg); color-scheme:dark; color:var(--color-text);
   font-family:var(--font-body); font-size:15px; line-height:1.55; font-weight:400;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
@@ -154,8 +165,8 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 .btn-primary:hover{ background:var(--color-accent-600); }
 .btn-primary:active{ background:var(--color-accent-700); }
 .btn-secondary{ border-color:var(--color-divider); }
-.btn-secondary:hover{ background:color-mix(in srgb, var(--color-text) 7%, transparent); }
-.btn-secondary:active{ background:color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-secondary:hover{ background:color-mix(in srgb, var(--color-text) 10%, transparent); border-color:var(--color-text); }
+.btn-secondary:active{ background:color-mix(in srgb, var(--color-text) 18%, transparent); }
 .btn-ghost{ color:var(--color-accent); padding-inline:var(--space-1); }
 .btn-ghost:hover{ background:color-mix(in srgb, var(--color-accent) 10%, transparent); }
 /* EXTENSION: a roomier hero-scale button, same component otherwise */
@@ -166,19 +177,13 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 .input{
   width:100%; min-height:36px; padding:6px 10px; font:inherit;
   font-size:14px; color:var(--color-text); caret-color:var(--color-accent);
-  background:var(--color-surface);
+  background:color-mix(in srgb, var(--color-text) 7%, transparent);
   border:1px solid var(--color-divider); border-radius:var(--radius-md);
-  transition:border-color .2s var(--ease);
+  transition:border-color .2s var(--ease), background .2s var(--ease);
 }
+.input::placeholder{ color:color-mix(in srgb, var(--color-text) 40%, transparent); }
 .input:hover{ border-color:color-mix(in srgb, var(--color-text) 45%, transparent); }
 .input:focus-visible{ border-color:var(--color-accent); outline-offset:0; }
-/* EXTENSION: the same input on the dark band */
-.on-dark .input{
-  background:color-mix(in srgb, #fff 8%, transparent);
-  border-color:color-mix(in srgb, #fff 28%, transparent); color:var(--color-bg);
-}
-.on-dark .input::placeholder{ color:color-mix(in srgb, #fff 45%, transparent); }
-.on-dark .input:focus-visible{ border-color:var(--color-accent-2); }
 
 /* ── Cards (kit) ──────────────────────────────────────────── */
 
@@ -202,6 +207,31 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 /* ============================================================
    Page — EXTENSION, composed from the components above
    ============================================================ */
+
+/* ── Ambient layers (film grain, cursor, pointer glow) ────── */
+
+.grain{
+  position:fixed; inset:0; z-index:90; width:100%; height:100%;
+  pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+}
+.glow{
+  position:fixed; z-index:0; top:0; left:0;
+  width:44vmax; height:44vmax; margin:-22vmax 0 0 -22vmax; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--color-accent) 14%, transparent) 0%,
+                                     color-mix(in srgb, var(--color-accent) 4%, transparent) 42%, transparent 70%);
+  pointer-events:none; opacity:0; transition:opacity .6s var(--ease); will-change:transform;
+}
+body.has-fine-pointer .glow{ opacity:1; }
+
+.cursor{ position:fixed; z-index:120; top:0; left:0; pointer-events:none; display:none; }
+body.has-fine-pointer .cursor{ display:block; }
+.cursor__dot,.cursor__ring{ position:absolute; top:0; left:0; border-radius:50%; transform:translate(-50%,-50%); }
+.cursor__dot{ width:5px; height:5px; background:var(--color-accent); }
+.cursor__ring{
+  width:32px; height:32px; border:1px solid var(--color-divider);
+  transition:width .3s var(--ease), height .3s var(--ease), border-color .3s var(--ease);
+}
+body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color-accent); }
 
 /* ── Preloader ────────────────────────────────────────────── */
 
@@ -229,7 +259,7 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
              border-color .35s var(--ease), padding .35s var(--ease);
 }
 .nav.is-stuck{
-  background:color-mix(in srgb, var(--color-bg) 88%, transparent);
+  background:color-mix(in srgb, var(--color-bg) 82%, transparent);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
   border-bottom-color:var(--color-divider);
 }
@@ -273,13 +303,25 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
   padding:clamp(88px,13vh,120px) var(--gut) var(--space-16);
   overflow:hidden;
 }
-/* a horizon of the 3C palette, sitting behind the lockup */
-.hero__ground{
-  position:absolute; inset:auto 0 0 0; height:52%; z-index:0; pointer-events:none;
+/* Warm light rising off the floor, the way the room does in the render.
+   Two parallax layers: a slow wash and a breathing ember. */
+.hero__ground{ position:absolute; inset:-8% -4% 0; z-index:0; pointer-events:none; }
+.hero__layer{ position:absolute; inset:0; will-change:transform; }
+.hero__layer--wash{
   background:
-    radial-gradient(120% 100% at 50% 100%, color-mix(in srgb, var(--color-accent) 13%, transparent) 0%, transparent 62%),
-    radial-gradient(90% 80% at 18% 100%, color-mix(in srgb, var(--color-accent-2) 15%, transparent) 0%, transparent 60%),
-    radial-gradient(80% 80% at 86% 96%, color-mix(in srgb, var(--color-accent-2) 10%, transparent) 0%, transparent 58%);
+    radial-gradient(120% 85% at 50% 104%, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 60%),
+    radial-gradient(80% 60% at 14% 96%, color-mix(in srgb, var(--terra-canopy) 16%, transparent) 0%, transparent 58%),
+    linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--terra-ground) 70%, transparent) 100%);
+}
+.hero__layer--ember{
+  background:radial-gradient(42% 30% at 50% 100%, color-mix(in srgb, var(--color-accent-600) 30%, transparent) 0%,
+                                                  color-mix(in srgb, var(--color-accent) 8%, transparent) 45%, transparent 72%);
+  filter:blur(6px); animation:emberPulse 7s ease-in-out infinite;
+}
+@keyframes emberPulse{ 0%,100%{opacity:.75; transform:scale(1);} 50%{opacity:1; transform:scale(1.05);} }
+.hero__vignette{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(78% 72% at 50% 44%, transparent 44%, color-mix(in srgb, #000 55%, transparent) 100%);
 }
 .hero__inner{ position:relative; z-index:1; max-width:1180px; width:100%; display:grid; justify-items:center; }
 
@@ -347,19 +389,21 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 .story__grid{ display:grid; gap:var(--space-12); align-items:center; }
 .story__figure img{ width:100%; }
 /* placeholder plate in the 3C palette until photography lands */
-/* Flat colour-block stand-in for photography, drawn from the 3C swatches:
-   canopy over trunk over soil, hard edges to match the kit's geometry. */
-.plate{
-  aspect-ratio:4/5; border:1px solid var(--color-divider);
-  background:
-    linear-gradient(var(--color-accent-2) 0 58%, transparent 58%),
-    linear-gradient(transparent 0 58%, var(--color-accent) 58% 78%, transparent 78%),
-    linear-gradient(transparent 0 78%, var(--terra-ink) 78% 100%);
-  position:relative; overflow:hidden;
+.story__figure{ position:relative; }
+.frame{
+  position:relative; border:1px solid var(--color-divider); padding:var(--space-2);
+  background:color-mix(in srgb, var(--color-text) 4%, transparent);
+  transform-style:preserve-3d; will-change:transform;
+  transition:transform .5s var(--ease-out);
 }
-.plate::after{
-  content:""; position:absolute; left:50%; top:14%; width:2px; height:52%;
-  background:color-mix(in srgb, var(--terra-ink) 55%, transparent);
+.frame img{ width:100%; height:auto; display:block; }
+.frame__tag{
+  position:absolute; left:var(--space-6); bottom:var(--space-6);
+  background:color-mix(in srgb, var(--color-bg) 78%, transparent);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  border:1px solid var(--color-divider); padding:var(--space-1) var(--space-2);
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  font-family:var(--font-heading); font-weight:600;
 }
 
 .facts{ display:grid; gap:var(--space-4); margin-top:var(--space-8); }
@@ -373,17 +417,23 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 
 .cards{ display:grid; gap:var(--space-4); margin-top:var(--space-12); }
 .card{ padding:var(--space-6); border:1px solid transparent; transition:border-color .3s var(--ease), transform .4s var(--ease-out), background .3s var(--ease); }
-.card:hover{ border-color:var(--color-accent); background:var(--color-accent-100); transform:translateY(-3px); }
+.card:hover{ border-color:var(--color-accent); background:var(--color-accent-wash); transform:translateY(-3px); }
 .card-title{ font-size:19px; }
 .card-body{ font-size:14px; }
 
 /* ── Dark band: countdown + signup ────────────────────────── */
 
 .notify{
-  background:var(--terra-ground); color:var(--color-bg);
+  position:relative; overflow:hidden;
+  background:var(--color-surface);
+  border-block:1px solid var(--color-divider);
   padding:var(--sec) var(--gut); text-align:center;
 }
-.notify__inner{ max-width:760px; margin-inline:auto; display:grid; justify-items:center; }
+.notify::before{
+  content:""; position:absolute; inset:auto 0 -30% 0; height:70%; pointer-events:none;
+  background:radial-gradient(50% 100% at 50% 100%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 70%);
+}
+.notify__inner{ position:relative; max-width:760px; margin-inline:auto; display:grid; justify-items:center; }
 .notify .kicker{ color:var(--color-accent-2); }
 .notify__logo{ width:clamp(150px,20vw,210px); height:auto; margin-bottom:var(--space-8); }
 .notify h2{ font-size:clamp(26px,3.2vw,40px); letter-spacing:-.02em; max-width:18ch; }
@@ -401,14 +451,14 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 @keyframes tick{ from{ transform:translateY(-14%); opacity:.25; } to{ transform:none; opacity:1; } }
 .count__l{
   font-size:10px; letter-spacing:.2em; text-transform:uppercase;
-  color:color-mix(in srgb, #fff 55%, transparent);
+  color:color-mix(in srgb, var(--color-text) 55%, transparent);
   font-family:var(--font-heading); font-weight:600;
 }
 
 .form{ width:min(480px,100%); }
 .form__row{ display:flex; gap:var(--space-2); }
 .form__row .input{ flex:1; }
-.form__note{ margin:var(--space-3) 0 0; font-size:12px; color:color-mix(in srgb, #fff 55%, transparent); }
+.form__note{ margin:var(--space-3) 0 0; font-size:12px; color:color-mix(in srgb, var(--color-text) 55%, transparent); }
 .form.is-error .input{ border-color:#e2705a; }
 .form.is-error .form__note{ color:#e2705a; }
 .form.is-ok .input{ border-color:var(--color-accent-2); }
@@ -451,6 +501,7 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
    the start rather than waiting for the scrolled state. */
 @media (max-width:599px){
   .nav__mark,.nav__word{ opacity:1; transform:none; }
+  .cursor,.glow,.grain{ display:none; }
 }
 @media (min-width:600px){
   .nav .btn-primary{ display:inline-flex; }
@@ -459,7 +510,7 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 @media (min-width:900px){
   .nav__links{ display:flex; }
   .cards{ grid-template-columns:repeat(3,1fr); }
-  .story__grid{ grid-template-columns:.8fr 1fr; }
+  .story__grid{ grid-template-columns:1fr 1fr; }
 }
 
 /* ── Reduced motion ───────────────────────────────────────── */

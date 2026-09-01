@@ -14,6 +14,8 @@
   const $$ = (s, r = doc) => Array.from(r.querySelectorAll(s));
   const lerp = (a, b, t) => a + (b - a) * t;
 
+  if (finePointer && !reduced) body.classList.add('has-fine-pointer');
+
   /* ---------------------------------------------------------
      1. Preloader — progress until fonts + window load settle
      --------------------------------------------------------- */
@@ -129,6 +131,7 @@
      --------------------------------------------------------- */
   const nav = $('#nav');
   const heroLogo = $('#heroLogo');
+  const layers = $$('.hero__layer');
   let lastY = 0;
   let ticking = false;
 
@@ -140,8 +143,12 @@
       nav.classList.toggle('is-hidden', y > 420 && y > lastY + 4);
     }
 
-    if (heroLogo && !reduced && y < innerHeight * 1.2) {
-      heroLogo.style.transform = `translate3d(0, ${(y * 0.09).toFixed(2)}px, 0)`;
+    if (!reduced && y < innerHeight * 1.2) {
+      if (heroLogo) heroLogo.style.transform = `translate3d(0, ${(y * 0.09).toFixed(2)}px, 0)`;
+      layers.forEach(l => {
+        const d = parseFloat(l.dataset.depth || 0.1);
+        l.style.transform = `translate3d(0, ${(y * d).toFixed(2)}px, 0) scale(${1 + d * 0.06})`;
+      });
     }
 
     lastY = y;
@@ -154,9 +161,23 @@
   onScroll();
 
   /* ---------------------------------------------------------
-     5. Magnetic buttons (fine pointers only)
+     5. Pointer: cursor, ambient glow, magnetic buttons, tilt
      --------------------------------------------------------- */
   if (finePointer && !reduced) {
+    const dot = $('.cursor__dot');
+    const ring = $('.cursor__ring');
+    const glow = $('#glow');
+
+    const p = { x: innerWidth / 2, y: innerHeight / 2 };
+    const soft = { x: p.x, y: p.y };
+    const slow = { x: p.x, y: p.y };
+
+    addEventListener('pointermove', e => { p.x = e.clientX; p.y = e.clientY; }, { passive: true });
+
+    const hot = 'a, button, input, .card, [data-tilt]';
+    doc.addEventListener('pointerover', e => { if (e.target.closest(hot)) body.classList.add('cursor-hot'); });
+    doc.addEventListener('pointerout',  e => { if (e.target.closest(hot)) body.classList.remove('cursor-hot'); });
+
     $$('[data-magnetic]').forEach(m => {
       m.addEventListener('pointermove', e => {
         const r = m.getBoundingClientRect();
@@ -165,6 +186,62 @@
       });
       m.addEventListener('pointerleave', () => { m.style.transform = ''; });
     });
+
+    $$('[data-tilt]').forEach(t => {
+      t.addEventListener('pointermove', e => {
+        const r = t.getBoundingClientRect();
+        const rx = ((e.clientY - r.top) / r.height - 0.5) * -5;
+        const ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
+        t.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      t.addEventListener('pointerleave', () => { t.style.transform = ''; });
+    });
+
+    const trail = () => {
+      soft.x = lerp(soft.x, p.x, 0.35); soft.y = lerp(soft.y, p.y, 0.35);
+      slow.x = lerp(slow.x, p.x, 0.055); slow.y = lerp(slow.y, p.y, 0.055);
+      if (dot)  dot.style.transform  = `translate(${p.x}px, ${p.y}px) translate(-50%,-50%)`;
+      if (ring) ring.style.transform = `translate(${soft.x}px, ${soft.y}px) translate(-50%,-50%)`;
+      if (glow) glow.style.transform = `translate3d(${slow.x}px, ${slow.y}px, 0)`;
+      requestAnimationFrame(trail);
+    };
+    requestAnimationFrame(trail);
+  }
+
+  /* ---------------------------------------------------------
+     5b. Film grain — a few noise tiles, cycled on a canvas
+     --------------------------------------------------------- */
+  const grain = $('#grain');
+  if (grain && !reduced) {
+    const ctx = grain.getContext('2d', { alpha: true });
+    const TILE = 180;
+    const frames = [];
+    let idx = 0;
+
+    for (let f = 0; f < 4; f++) {
+      const c = doc.createElement('canvas');
+      c.width = c.height = TILE;
+      const cc = c.getContext('2d');
+      const img = cc.createImageData(TILE, TILE);
+      for (let i = 0; i < img.data.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+        img.data[i + 3] = 255;
+      }
+      cc.putImageData(img, 0, 0);
+      frames.push(c);
+    }
+
+    const size = () => { grain.width = innerWidth; grain.height = innerHeight; };
+    const paint = () => {
+      ctx.clearRect(0, 0, grain.width, grain.height);
+      ctx.fillStyle = ctx.createPattern(frames[idx++ % frames.length], 'repeat');
+      ctx.fillRect(0, 0, grain.width, grain.height);
+    };
+
+    size(); paint();
+    setInterval(paint, 90);
+    addEventListener('resize', () => { size(); paint(); }, { passive: true });
   }
 
   /* ---------------------------------------------------------
