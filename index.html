@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="hr" data-lang="hr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Terra — Restoran · Uskoro otvaramo</title>
+<meta name="description" content="Terra restoran uskoro otvara vrata. Kuhinja s korijenima u zemlji: sezonske namirnice, otvorena vatra i vino iz susjedstva." />
+<meta name="theme-color" content="#0e0c0a" />
+<meta name="color-scheme" content="dark" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Terra — Restoran · Uskoro otvaramo" />
+<meta property="og:description" content="Sezonske namirnice, otvorena vatra i vino iz susjedstva. Otvaramo uskoro." />
+<meta property="og:image" content="assets/img/og.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500&display=swap" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Terra",
+  "description": "Restoran sezonske kuhinje s otvorenom vatrom.",
+  "servesCuisine": "Mediteranska, sezonska",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ilica 1",
+    "addressLocality": "Zagreb",
+    "postalCode": "10000",
+    "addressCountry": "HR"
+  },
+  "email": "hello@terra-restoran.hr",
+  "telephone": "+385 1 000 0000",
+  "openingHours": "We-Su 17:00-24:00"
+}
+</script>
+</head>
+<body>
+
+<!-- ── Preloader ───────────────────────────────────────────── -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark">
+    <svg viewBox="0 0 100 100" width="64" height="64" aria-hidden="true">
+      <circle class="loader__ring" cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="1" />
+      <path class="loader__seed" d="M50 74c0-16 8-28 22-34-2 18-9 29-22 34zM50 74c0-16-8-28-22-34 2 18 9 29 22 34z"
+            fill="currentColor" />
+    </svg>
+  </div>
+  <div class="loader__bar"><span id="loaderBar"></span></div>
+</div>
+
+<!-- ── Ambient layers ─────────────────────────────────────── -->
+<canvas class="grain" id="grain" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<a class="skip" href="#main">Preskoči na sadržaj</a>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#main" aria-label="Terra">
+    <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true" class="nav__mark">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="3" />
+      <path d="M50 76c0-17 8-30 24-36-2 19-10 31-24 36zM50 76c0-17-8-30-24-36 2 19 10 31 24 36z" fill="currentColor" />
+    </svg>
+    <span class="nav__word">Terra</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Glavna navigacija">
+    <a href="#story" data-hr="Priča" data-en="Story">Priča</a>
+    <a href="#taste" data-hr="Kuhinja" data-en="Kitchen">Kuhinja</a>
+    <a href="#visit" data-hr="Posjet" data-en="Visit">Posjet</a>
+  </nav>
+
+  <div class="nav__side">
+    <button class="lang" id="lang" type="button" aria-label="Promijeni jezik / Switch language">
+      <span class="lang__opt is-on" data-set="hr">HR</span><span class="lang__sep">/</span><span class="lang__opt" data-set="en">EN</span>
+    </button>
+    <a class="btn btn--sm" href="#notify" data-magnetic data-hr="Obavijesti me" data-en="Notify me">Obavijesti me</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero__scene" aria-hidden="true">
+    <div class="hero__layer hero__layer--sky" data-depth="0.06"></div>
+    <div class="hero__layer hero__layer--ember" data-depth="0.14"></div>
+    <div class="hero__layer hero__layer--ridge" data-depth="0.26"></div>
+    <div class="hero__vignette"></div>
+  </div>
+
+  <div class="hero__inner">
+    <p class="eyebrow reveal" data-hr="Zagreb · Otvaramo 2026." data-en="Zagreb · Opening 2026.">Zagreb · Otvaramo 2026.</p>
+
+    <h1 class="hero__title" aria-label="Terra">
+      <span class="split" data-split>Terra</span>
+    </h1>
+
+    <p class="hero__lede reveal" data-delay="120"
+       data-hr="Kuhinja koja počinje u tlu. Sezonske namirnice, otvorena vatra i vino iz susjedstva — u prostoru koji miriše na dim, kruh i kadulju."
+       data-en="A kitchen that begins in the soil. Seasonal produce, open fire and wine from down the road — in a room that smells of smoke, bread and sage.">
+      Kuhinja koja počinje u tlu. Sezonske namirnice, otvorena vatra i vino iz susjedstva — u prostoru koji miriše na dim, kruh i kadulju.
+    </p>
+
+    <div class="hero__cta reveal" data-delay="220">
+      <a class="btn" href="#notify" data-magnetic data-hr="Javi mi kad otvorimo" data-en="Tell me when we open">Javi mi kad otvorimo</a>
+      <a class="link" href="#story" data-hr="Naša priča" data-en="Our story">Naša priča</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scrollLine"></span>
+    <span class="hero__scrollTxt" data-hr="listaj" data-en="scroll">listaj</span>
+  </div>
+</section>
+
+<!-- ── Marquee ────────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" id="marqueeTrack">
+    <span>Otvorena vatra</span><i>✦</i><span>Sezonski meni</span><i>✦</i><span>Kruh od kiselog tijesta</span><i>✦</i>
+    <span>Vina malih vinara</span><i>✦</i><span>Od zemlje do stola</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ── Story ──────────────────────────────────────────────── -->
+<section class="story" id="story">
+  <div class="story__grid">
+    <div class="story__media reveal">
+      <div class="frame" data-tilt>
+        <div class="frame__img frame__img--soil"></div>
+        <span class="frame__cap" data-hr="Vrt · svibanj" data-en="The garden · May">Vrt · svibanj</span>
+      </div>
+    </div>
+
+    <div class="story__body">
+      <h2 class="h2 reveal"><span data-split-lines
+        data-hr="Sve što serviramo ima adresu."
+        data-en="Everything we serve has an address.">Sve što serviramo ima adresu.</span></h2>
+
+      <p class="p reveal" data-delay="80"
+        data-hr="Terra je restoran od dvadeset i osam mjesta. Meni pišemo ujutro, nakon što stigne sanduk s tržnice, i mijenjamo ga kad se promijeni vrijeme. Nema dugih kartica — samo ono što je danas najbolje."
+        data-en="Terra is a twenty-eight seat restaurant. We write the menu in the morning, after the market crate arrives, and rewrite it when the weather turns. No long lists — only what is best today.">
+        Terra je restoran od dvadeset i osam mjesta. Meni pišemo ujutro, nakon što stigne sanduk s tržnice, i mijenjamo ga kad se promijeni vrijeme. Nema dugih kartica — samo ono što je danas najbolje.
+      </p>
+
+      <ul class="facts">
+        <li class="reveal" data-delay="120"><b>28</b><span data-hr="mjesta za stolom" data-en="seats at the table">mjesta za stolom</span></li>
+        <li class="reveal" data-delay="180"><b>6</b><span data-hr="sljedova u degustaciji" data-en="courses in the tasting">sljedova u degustaciji</span></li>
+        <li class="reveal" data-delay="240"><b>41</b><span data-hr="km do najdaljeg dobavljača" data-en="km to our furthest grower">km do najdaljeg dobavljača</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Taste ──────────────────────────────────────────────── -->
+<section class="taste" id="taste">
+  <header class="sec__head">
+    <p class="eyebrow reveal" data-hr="Prvi nagovještaj" data-en="A first taste">Prvi nagovještaj</p>
+    <h2 class="h2 reveal" data-delay="60"><span
+      data-hr="Tri jela s kojima počinjemo."
+      data-en="Three plates we open with.">Tri jela s kojima počinjemo.</span></h2>
+  </header>
+
+  <ol class="cards">
+    <li class="card reveal" data-tilt>
+      <span class="card__no">01</span>
+      <h3 class="card__title" data-hr="Pečena cikla, dimljeni skorup, orah" data-en="Fire-roasted beet, smoked cream, walnut">Pečena cikla, dimljeni skorup, orah</h3>
+      <p class="card__txt" data-hr="Cijela cikla, četiri sata u pepelu. Skorup s planine, ulje od oraha tučeno u mužaru." data-en="Whole beetroot, four hours in the embers. Mountain cream, walnut oil pounded in a mortar.">Cijela cikla, četiri sata u pepelu. Skorup s planine, ulje od oraha tučeno u mužaru.</p>
+      <span class="card__glow" aria-hidden="true"></span>
+    </li>
+    <li class="card reveal" data-delay="90" data-tilt>
+      <span class="card__no">02</span>
+      <h3 class="card__title" data-hr="Kruh od starog žita, maslac od kadulje" data-en="Heritage grain bread, sage butter">Kruh od starog žita, maslac od kadulje</h3>
+      <p class="card__txt" data-hr="Tijesto koje raste trideset i šest sati. Peče se u istoj peći u kojoj gori i vatra za roštilj." data-en="A dough that rises thirty-six hours, baked in the same oven that feeds the grill.">Tijesto koje raste trideset i šest sati. Peče se u istoj peći u kojoj gori i vatra za roštilj.</p>
+      <span class="card__glow" aria-hidden="true"></span>
+    </li>
+    <li class="card reveal" data-delay="180" data-tilt>
+      <span class="card__no">03</span>
+      <h3 class="card__title" data-hr="Janjetina s ražnja, divlji luk, jus od koštica" data-en="Spit lamb, wild onion, stone-fruit jus">Janjetina s ražnja, divlji luk, jus od koštica</h3>
+      <p class="card__txt" data-hr="Janje s Velebita, tri sata iznad hrastove žeravice, glazirano jusom od koštica višnje." data-en="Velebit lamb, three hours over oak coals, glazed with a sour-cherry stone jus.">Janje s Velebita, tri sata iznad hrastove žeravice, glazirano jusom od koštica višnje.</p>
+      <span class="card__glow" aria-hidden="true"></span>
+    </li>
+  </ol>
+</section>
+
+<!-- ── Countdown + Signup ─────────────────────────────────── -->
+<section class="notify" id="notify" data-open="2026-11-15T18:00:00+01:00">
+  <div class="notify__inner">
+    <p class="eyebrow reveal" data-hr="Vrata se otvaraju" data-en="The doors open">Vrata se otvaraju</p>
+    <h2 class="h2 h2--center reveal" data-delay="60"><span
+      data-hr="15. studenoga, u 18 sati."
+      data-en="15 November, at 6pm.">15. studenoga, u 18 sati.</span></h2>
+
+    <div class="count reveal" data-delay="120" id="count" role="timer" aria-live="off">
+      <div class="count__cell"><span class="count__n" id="cd-d">00</span><span class="count__l" data-hr="dana" data-en="days">dana</span></div>
+      <span class="count__sep">:</span>
+      <div class="count__cell"><span class="count__n" id="cd-h">00</span><span class="count__l" data-hr="sati" data-en="hours">sati</span></div>
+      <span class="count__sep">:</span>
+      <div class="count__cell"><span class="count__n" id="cd-m">00</span><span class="count__l" data-hr="minuta" data-en="minutes">minuta</span></div>
+      <span class="count__sep">:</span>
+      <div class="count__cell"><span class="count__n" id="cd-s">00</span><span class="count__l" data-hr="sekundi" data-en="seconds">sekundi</span></div>
+    </div>
+
+    <form class="form reveal" data-delay="180" id="form" novalidate>
+      <div class="form__row">
+        <label class="sr-only" for="email" data-hr="E-mail adresa" data-en="Email address">E-mail adresa</label>
+        <input class="form__input" id="email" name="email" type="email" autocomplete="email" required
+               placeholder="vasa@adresa.hr" data-hr-ph="vasa@adresa.hr" data-en-ph="you@example.com" />
+        <button class="btn btn--solid" type="submit" data-magnetic data-hr="Prijavi me" data-en="Sign me up">Prijavi me</button>
+      </div>
+      <p class="form__note" id="formNote"
+         data-hr="Jedna poruka kad otvorimo rezervacije. Ništa više."
+         data-en="One email when reservations open. Nothing else.">Jedna poruka kad otvorimo rezervacije. Ništa više.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="foot" id="visit">
+  <div class="foot__grid">
+    <div class="foot__col">
+      <h3 class="foot__h" data-hr="Adresa" data-en="Address">Adresa</h3>
+      <p>Ilica 1<br />10000 Zagreb, HR</p>
+    </div>
+    <div class="foot__col">
+      <h3 class="foot__h" data-hr="Radno vrijeme" data-en="Hours">Radno vrijeme</h3>
+      <p data-hr="Srijeda – nedjelja<br />17:00 – 24:00" data-en="Wednesday – Sunday<br />5pm – midnight">Srijeda – nedjelja<br />17:00 – 24:00</p>
+    </div>
+    <div class="foot__col">
+      <h3 class="foot__h" data-hr="Kontakt" data-en="Contact">Kontakt</h3>
+      <p>
+        <a href="mailto:hello@terra-restoran.hr">hello@terra-restoran.hr</a><br />
+        <a href="tel:+38510000000">+385 1 000 0000</a>
+      </p>
+    </div>
+    <div class="foot__col">
+      <h3 class="foot__h" data-hr="Pratite nas" data-en="Follow">Pratite nas</h3>
+      <p>
+        <a href="https://instagram.com" rel="noopener">Instagram</a><br />
+        <a href="https://facebook.com" rel="noopener">Facebook</a>
+      </p>
+    </div>
+  </div>
+  <div class="foot__base">
+    <span>© <span id="year">2026</span> Terra Restoran</span>
+    <span data-hr="Uskoro otvaramo." data-en="Opening soon.">Uskoro otvaramo.</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
