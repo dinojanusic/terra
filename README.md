@@ -72,28 +72,29 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
   buttons and a 3D tilt on the interior photo. All fine-pointer only.
 - **Parallax** on the hero: two ember layers and the lockup drift at different
   rates from a single rAF scroll loop.
-- **Countdown** to the opening moment, with a per-digit tick.
 - **HR / EN toggle**, persisted in `localStorage`.
-- **Signup form** with client-side validation.
+- **No date and no email capture** — the opening is announced as "soon", so
+  there is no countdown and no form to run, maintain, or comply with.
 - **No-JS fallback** — a `<noscript>` block renders every animated element in
-  its final state, drops the preloader and hides the countdown.
+  its final state and drops the preloader.
 - `prefers-reduced-motion` is respected throughout.
 
 ## Things to change before launch
 
-1. **Opening date** — `data-open` on `<section id="notify">` (ISO 8601 with
-   offset). The heading beside it and the hero kicker are separate copy.
+1. **The opening date, once you have one** — three places say "soon": the hero
+   kicker, the header tag, and `<section id="opening">`. If you later want a
+   countdown or an email signup back, both are in the git history on this
+   branch (commit "Run the kit's dark theme…") and can be lifted straight out.
 2. **Contact details** — the Čakovec address, hours, phone and social links are
    still placeholders; they live in the footer and in the JSON-LD block in
    `<head>`.
-3. **Signup endpoint** — `assets/js/main.js`, section 8. It validates and keeps
-   addresses in `localStorage` only, so nothing leaves the browser. Replace it
-   with a `fetch()` POST to your mail provider.
-4. **Photography** — the story section carries the interior render, served as
+3. **Photography** — the story section carries the interior render, served as
    `interior-800/1400.webp` plus the 2000px original via `srcset`. Regenerate
    those widths if you replace the source image.
-5. **Menu copy** — the three dishes are placeholder writing.
-6. **OG image** — `assets/img/og.png` is generated from the lockup at
+4. **Menu copy** — the six categories describe a wood oven, a grill and
+   house-made desserts. Adjust them to what the kitchen will actually run, and
+   swap the numbers in the story section (`400 °C`, `48 h`, `41 km`) for real ones.
+5. **OG image** — `assets/img/og.png` is generated from the lockup at
    1200×630; replace it with a photograph when one exists.
 
 ## Browser support

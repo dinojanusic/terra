@@ -251,84 +251,7 @@
   if (track) track.innerHTML += track.innerHTML;
 
   /* ---------------------------------------------------------
-     7. Countdown
-     --------------------------------------------------------- */
-  const notify = $('#notify');
-  const cells = { d: $('#cd-d'), h: $('#cd-h'), m: $('#cd-m'), s: $('#cd-s') };
-
-  if (notify && cells.d) {
-    const target = new Date(notify.dataset.open).getTime();
-    const pad = n => String(Math.max(0, n)).padStart(2, '0');
-
-    const set = (el, val) => {
-      if (!el || el.textContent === val) return;
-      el.textContent = val;
-      if (reduced) return;
-      el.classList.remove('tick');
-      void el.offsetWidth;      // restart the animation
-      el.classList.add('tick');
-    };
-
-    const tick = () => {
-      const s = Math.floor(Math.max(0, target - Date.now()) / 1000);
-      set(cells.d, pad(Math.floor(s / 86400)));
-      set(cells.h, pad(Math.floor(s / 3600) % 24));
-      set(cells.m, pad(Math.floor(s / 60) % 60));
-      set(cells.s, pad(s % 60));
-    };
-
-    tick();
-    setInterval(tick, 1000);
-  }
-
-  /* ---------------------------------------------------------
-     8. Signup form — front-end only; POST it to your ESP later
-     --------------------------------------------------------- */
-  const form = $('#form');
-  if (form) {
-    const input = $('#email', form);
-    const note = $('#formNote');
-    const valid = v => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim());
-
-    const say = (state, hr, en) => {
-      form.classList.remove('is-error', 'is-ok');
-      if (state) form.classList.add(state);
-      if (!note) return;
-      note.dataset.hr = hr;
-      note.dataset.en = en;
-      note.innerHTML = html.dataset.lang === 'en' ? en : hr;
-    };
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const v = input ? input.value : '';
-
-      if (!valid(v)) {
-        say('is-error', 'Provjerite e-mail adresu.', 'Please check that email address.');
-        if (input) input.focus();
-        return;
-      }
-
-      try {
-        const list = JSON.parse(localStorage.getItem('terra:list') || '[]');
-        const addr = v.trim().toLowerCase();
-        if (!list.includes(addr)) list.push(addr);
-        localStorage.setItem('terra:list', JSON.stringify(list));
-      } catch (_) { /* private mode — nothing to keep */ }
-
-      say('is-ok', 'Hvala. Javljamo se prvi dan.', 'Thank you. We write on day one.');
-      form.reset();
-    });
-
-    if (input) input.addEventListener('input', () => {
-      if (form.classList.contains('is-error')) {
-        say('', 'Jedna poruka kad otvorimo rezervacije. Ništa više.', 'One email when reservations open. Nothing else.');
-      }
-    });
-  }
-
-  /* ---------------------------------------------------------
-     9. Language toggle (HR / EN)
+     7. Language toggle (HR / EN)
      --------------------------------------------------------- */
   const langBtn = $('#lang');
 
@@ -371,7 +294,7 @@
   });
 
   /* ---------------------------------------------------------
-     10. Odds and ends
+     8. Odds and ends
      --------------------------------------------------------- */
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
