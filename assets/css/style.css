@@ -303,8 +303,8 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
   padding:clamp(88px,13vh,120px) var(--gut) var(--space-16);
   overflow:hidden;
 }
-/* Warm light rising off the floor, the way the room does in the render.
-   Two parallax layers: a slow wash and a breathing ember. */
+/* Warm light rising off the floor, the way the room's lighting does in the
+   render — not a fire. Two parallax layers: a slow wash and a soft pulse. */
 .hero__ground{ position:absolute; inset:-8% -4% 0; z-index:0; pointer-events:none; }
 .hero__layer{ position:absolute; inset:0; will-change:transform; }
 .hero__layer--wash{
@@ -313,12 +313,12 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
     radial-gradient(80% 60% at 14% 96%, color-mix(in srgb, var(--terra-canopy) 16%, transparent) 0%, transparent 58%),
     linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--terra-ground) 70%, transparent) 100%);
 }
-.hero__layer--ember{
+.hero__layer--warm{
   background:radial-gradient(42% 30% at 50% 100%, color-mix(in srgb, var(--color-accent-600) 30%, transparent) 0%,
                                                   color-mix(in srgb, var(--color-accent) 8%, transparent) 45%, transparent 72%);
-  filter:blur(6px); animation:emberPulse 7s ease-in-out infinite;
+  filter:blur(6px); animation:warmPulse 7s ease-in-out infinite;
 }
-@keyframes emberPulse{ 0%,100%{opacity:.75; transform:scale(1);} 50%{opacity:1; transform:scale(1.05);} }
+@keyframes warmPulse{ 0%,100%{opacity:.75; transform:scale(1);} 50%{opacity:1; transform:scale(1.05);} }
 .hero__vignette{
   position:absolute; inset:0; z-index:0; pointer-events:none;
   background:radial-gradient(78% 72% at 50% 44%, transparent 44%, color-mix(in srgb, #000 55%, transparent) 100%);
@@ -469,7 +469,7 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
   transition-delay:var(--d,0ms);
 }
 .split-wrap{ display:block; overflow:hidden; }
-.line{ display:block; transform:translateY(105%); opacity:0; }
+.line{ display:block; white-space:nowrap; transform:translateY(105%); opacity:0; }
 .is-in .line{
   transform:none; opacity:1;
   transition:transform .9s var(--ease-out), opacity .7s var(--ease-out);

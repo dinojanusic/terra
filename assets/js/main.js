@@ -64,34 +64,43 @@
   /* ---------------------------------------------------------
      2. Line-split headings, measured from real wrap points
      --------------------------------------------------------- */
+  // Splits a heading on the browser's own wrap points. Measuring per character
+  // with a Range gives the real line boxes; measuring inline-block words does
+  // not — each carries a trailing space, so a row can be judged to fit and then
+  // overflow its own line box, stranding a word on a row of its own.
   const splitLines = (el) => {
     const source = el.dataset.raw || el.textContent.trim();
     el.dataset.raw = source;
-    el.textContent = '';
+    el.textContent = source;
 
-    const words = source.split(/\s+/).map(w => {
-      const s = doc.createElement('span');
-      s.textContent = w + ' ';
-      s.style.display = 'inline-block';
-      el.appendChild(s);
-      return s;
-    });
-
+    const node = el.firstChild;
+    const range = doc.createRange();
     const rows = [];
+    let start = 0;
     let top = null;
-    words.forEach(w => {
-      if (top === null || Math.abs(w.offsetTop - top) > 2) { rows.push([]); top = w.offsetTop; }
-      rows[rows.length - 1].push(w.textContent);
-    });
+
+    for (let i = 1; i <= source.length; i++) {
+      range.setStart(node, i - 1);
+      range.setEnd(node, i);
+      const r = range.getBoundingClientRect();
+      if (!r.width && !r.height) continue;        // a collapsed break space
+      if (top === null) { top = r.top; continue; }
+      if (Math.abs(r.top - top) > 2) {            // this character starts a new line
+        rows.push(source.slice(start, i - 1));
+        start = i - 1;
+        top = r.top;
+      }
+    }
+    rows.push(source.slice(start));
 
     el.textContent = '';
-    rows.forEach((row, i) => {
+    rows.map(r => r.trim()).filter(Boolean).forEach((row, i) => {
       const wrap = doc.createElement('span');
       wrap.className = 'split-wrap';
       const line = doc.createElement('span');
       line.className = 'line';
       line.style.setProperty('--i', i);
-      line.textContent = row.join('').trim();
+      line.textContent = row;
       wrap.appendChild(line);
       el.appendChild(wrap);
     });

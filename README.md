@@ -85,15 +85,17 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
    kicker, the header tag, and `<section id="opening">`. If you later want a
    countdown or an email signup back, both are in the git history on this
    branch (commit "Run the kit's dark theme…") and can be lifted straight out.
-2. **Contact details** — the Čakovec address, hours, phone and social links are
-   still placeholders; they live in the footer and in the JSON-LD block in
-   `<head>`.
+2. **Contact details** — the street (Planinarski put, Čakovec) and the Instagram
+   and Facebook links are real. The house number, phone and email are still
+   placeholders, as are the hours; they live in the footer and in the JSON-LD
+   block in `<head>`.
 3. **Photography** — the story section carries the interior render, served as
    `interior-800/1400.webp` plus the 2000px original via `srcset`. Regenerate
    those widths if you replace the source image.
-4. **Menu copy** — the six categories describe a wood oven, a grill and
-   house-made desserts. Adjust them to what the kitchen will actually run, and
-   swap the numbers in the story section (`400 °C`, `48 h`, `41 km`) for real ones.
+4. **Menu copy** — the six categories deliberately make no claim about cooking
+   equipment: no oven type, no grill fuel, no fire. Keep it that way unless the
+   kitchen is confirmed. The numbers in the story section (`48 h`, `12`, `41 km`)
+   are still invented — swap them for real ones.
 5. **OG image** — `assets/img/og.png` is generated from the lockup at
    1200×630; replace it with a photograph when one exists.
 
