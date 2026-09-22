@@ -12,7 +12,7 @@ assets/
   js/main.js        preloader, line-split headings, reveals, countdown, i18n
   fonts/            Archivo (variable, 3 subsets) — self-hosted from the kit
   img/              lockups (paper + reverse), tree marks, hero photograph
-                    and interior render at two/three widths, favicon, OG card
+                    at two widths, favicon, OG card
 ```
 
 ## Run it
@@ -34,7 +34,7 @@ Everything visual traces back to the asset kit, not to invention:
 | The neutral ramp, `--color-divider` | Hairlines and muted text |
 | Archivo 400/600/800, `--font-heading-weight: 800`, the h1–h6 scale, `-0.015em` tracking | All type |
 | 4px spacing scale, `--radius-*: 0`, `--shadow-sm/md/lg` | Rhythm, square corners, card elevation |
-| `.btn` / `.btn-primary` / `.btn-secondary`, `.input`, `.card` + `.card-kicker` / `.card-title` / `.card-body`, `.hr`, `.tag`, `h6` kicker, focus and selection rules | The page is composed from these classes as-is |
+| `.btn` / `.btn-primary` / `.btn-secondary`, `.tag`, `h6` kicker, focus and selection rules | The page is composed from these classes as-is. The kit's other components (`.card`, `.input`, `.hr`) were dropped along with the sections that used them — take them back from this branch's history if a section returns |
 | Logo lockup + reverse lockup (3C) | The reverse lockup carries the hero and the countdown band, and — cropped to the tree — the header mark, preloader and favicon. The paper lockup ships too, and is what the JSON-LD `logo` points at |
 
 ### The dark theme
@@ -59,13 +59,19 @@ Other additions are marked `EXTENSION` in `style.css`: a display step above the
 kit's 42px h1 (a landing hero needs one), page-scale spacing continuing the
 same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
 
+## The page
+
+Three blocks: the hero (the room, the brand text), the opening statement, and
+the footer. No menu, no story section, no ticker — a coming-soon page that says
+where and who, and nothing it cannot yet stand behind.
+
 ## What's inside
 
 - **Preloader** with a progress bar tied to real font + `load` readiness.
 - **Line-split headings** (`data-split-lines`) measured from real wrap points,
   re-split after fonts load, on resize, and on language change.
 - **Scroll reveals** via `IntersectionObserver` with per-element delays
-  (`data-delay="120"`), plus a rule that draws itself in (`.hr--draw`).
+  (`data-delay="120"`).
 - **Hero** is the room itself: the photograph runs full-bleed behind a scrim
   that ranges the copy left on wide screens and settles the whole frame on
   narrow ones, where the crop shifts to keep the lit logo wall in shot. The
@@ -73,8 +79,8 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
 - **Header** that hides on scroll-down; the brand shows from the first frame,
   since the hero no longer carries its own lockup.
 - **Ambient motion on the dark ground** — a canvas film-grain layer, a custom
-  cursor with a trailing ring, a warm glow that follows the pointer, magnetic
-  buttons and a 3D tilt on the interior photo. All fine-pointer only.
+  cursor with a trailing ring, a warm glow that follows the pointer, and
+  magnetic buttons. All fine-pointer only.
 - **Parallax** on the hero: the photograph and the warm layer drift at
   different rates from a single rAF scroll loop.
 - **HR / EN toggle**, persisted in `localStorage`.
@@ -97,12 +103,7 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
 3. **Photography** — the story section carries the interior render, served as
    `interior-800/1400.webp` plus the 2000px original via `srcset`. Regenerate
    those widths if you replace the source image.
-4. **The marquee** under the hero still lists food (pizza, burgeri, roštilj).
-   It is the only food content left now that the category section is gone —
-   say the word and it becomes brand lines instead.
-5. **Story numbers** — `48 h`, `12` and `41 km` are still invented. Swap them
-   for real ones, or drop the block.
-6. **OG image** — `assets/img/og.png` is generated from the lockup at
+4. **OG image** — `assets/img/og.png` is generated from the lockup at
    1200×630; replace it with a photograph when one exists.
 
 ## Browser support

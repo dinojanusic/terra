@@ -140,12 +140,6 @@ ul,ol{ margin:0; padding:0; list-style:none; }
 /* fixed header clearance for in-page anchors */
 section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 
-/* ── Rules (kit) ──────────────────────────────────────────── */
-
-.hr{ height:2px; border:0; margin:var(--space-4) 0; background:var(--color-divider); }
-.hr--draw{ transform:scaleX(0); transform-origin:left; }
-.hr--draw.is-in{ transform:scaleX(1); transition:transform 1s var(--ease-out); transition-delay:var(--d,0ms); }
-
 /* ── Buttons (kit) ────────────────────────────────────────── */
 
 .btn{
@@ -171,30 +165,6 @@ section[id], footer[id]{ scroll-margin-top:clamp(64px,9vh,88px); }
 .btn-ghost:hover{ background:color-mix(in srgb, var(--color-accent) 10%, transparent); }
 /* EXTENSION: a roomier hero-scale button, same component otherwise */
 .btn-lg{ font-size:15px; padding:var(--space-3) var(--space-6); }
-
-/* ── Forms (kit) ──────────────────────────────────────────── */
-
-.input{
-  width:100%; min-height:36px; padding:6px 10px; font:inherit;
-  font-size:14px; color:var(--color-text); caret-color:var(--color-accent);
-  background:color-mix(in srgb, var(--color-text) 7%, transparent);
-  border:1px solid var(--color-divider); border-radius:var(--radius-md);
-  transition:border-color .2s var(--ease), background .2s var(--ease);
-}
-.input::placeholder{ color:color-mix(in srgb, var(--color-text) 40%, transparent); }
-.input:hover{ border-color:color-mix(in srgb, var(--color-text) 45%, transparent); }
-.input:focus-visible{ border-color:var(--color-accent); outline-offset:0; }
-
-/* ── Cards (kit) ──────────────────────────────────────────── */
-
-.card{
-  display:flex; flex-direction:column; gap:var(--space-2);
-  padding:var(--space-3); border-radius:var(--radius-md); background:var(--color-surface);
-}
-.card-kicker{ font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent); }
-.card-title{ font-family:var(--font-heading); font-weight:var(--font-heading-weight); font-size:17px; line-height:1.2; }
-.card-body{ margin:0; font-size:13px; opacity:.8; flex:1; }
-.elev-sm{ box-shadow:var(--shadow-sm); } .elev-md{ box-shadow:var(--shadow-md); }
 
 /* ── Tags (kit) ───────────────────────────────────────────── */
 
@@ -381,68 +351,11 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
   }
 }
 
-/* ── Marquee ──────────────────────────────────────────────── */
-
-.marquee{
-  border-block:1px solid var(--color-divider); background:var(--color-surface);
-  padding-block:var(--space-3); overflow:hidden;
-}
-.marquee__track{
-  display:flex; gap:var(--space-8); align-items:center; width:max-content;
-  animation:slide 36s linear infinite;
-  font-family:var(--font-heading); font-weight:600; font-size:12px;
-  letter-spacing:.18em; text-transform:uppercase; white-space:nowrap;
-}
-.marquee:hover .marquee__track{ animation-play-state:paused; }
-.marquee__track i{ color:var(--color-accent); font-style:normal; }
-@keyframes slide{ to{ transform:translateX(-50%); } }
-
-/* ── Sections ─────────────────────────────────────────────── */
-
-.sec{ padding:var(--sec) var(--gut); }
-.sec__inner{ max-width:1180px; margin-inline:auto; }
 .kicker{
   font-size:12px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--color-accent); font-family:var(--font-heading); font-weight:600;
   margin:0 0 var(--space-4);
 }
-.h-lg{ font-size:clamp(28px,3.6vw,46px); letter-spacing:-.02em; max-width:18ch; }
-.lead{ font-size:clamp(15px,1.4vw,17px); max-width:54ch; color:color-mix(in srgb, var(--color-text) 72%, transparent); }
-
-.story__grid{ display:grid; gap:var(--space-12); align-items:center; }
-.story__figure img{ width:100%; }
-/* placeholder plate in the 3C palette until photography lands */
-.story__figure{ position:relative; }
-.frame{
-  position:relative; border:1px solid var(--color-divider); padding:var(--space-2);
-  background:color-mix(in srgb, var(--color-text) 4%, transparent);
-  transform-style:preserve-3d; will-change:transform;
-  transition:transform .5s var(--ease-out);
-}
-.frame img{ width:100%; height:auto; display:block; }
-.frame__tag{
-  position:absolute; left:var(--space-6); bottom:var(--space-6);
-  background:color-mix(in srgb, var(--color-bg) 78%, transparent);
-  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-  border:1px solid var(--color-divider); padding:var(--space-1) var(--space-2);
-  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-  font-family:var(--font-heading); font-weight:600;
-}
-
-.facts{ display:grid; gap:var(--space-4); margin-top:var(--space-8); }
-.facts li{ display:flex; align-items:baseline; gap:var(--space-4); padding-top:var(--space-3); border-top:1px solid var(--color-divider); }
-.facts b{
-  font-family:var(--font-heading); font-weight:var(--font-heading-weight);
-  font-size:clamp(26px,3vw,34px); line-height:1; letter-spacing:-.02em;
-  color:var(--color-accent); min-width:3ch;
-}
-.facts span{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:color-mix(in srgb, var(--color-text) 55%, transparent); }
-
-.cards{ display:grid; gap:var(--space-4); margin-top:var(--space-12); }
-.card{ padding:var(--space-6); border:1px solid transparent; transition:border-color .3s var(--ease), transform .4s var(--ease-out), background .3s var(--ease); }
-.card:hover{ border-color:var(--color-accent); background:var(--color-accent-wash); transform:translateY(-3px); }
-.card-title{ font-size:19px; }
-.card-body{ font-size:14px; }
 
 /* ── Opening statement ────────────────────────────────────── */
 
@@ -506,14 +419,8 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
 @media (max-width:599px){
   .cursor,.glow,.grain{ display:none; }
 }
-@media (min-width:600px){
-  .nav .btn-primary{ display:inline-flex; }
-  .cards{ grid-template-columns:repeat(2,1fr); }
-}
 @media (min-width:900px){
   .nav__links{ display:flex; }
-  .cards{ grid-template-columns:repeat(3,1fr); }
-  .story__grid{ grid-template-columns:1fr 1fr; }
 }
 
 /* ── Reduced motion ───────────────────────────────────────── */
@@ -524,5 +431,4 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
     transition-duration:.001ms !important; scroll-behavior:auto !important;
   }
   .reveal,.line{ opacity:1; transform:none; }
-  .hr--draw{ transform:none; }
 }

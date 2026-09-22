@@ -23,7 +23,6 @@
   /* Without JS nothing drives the intro, so hand the page over as-is. */
   .loader{ display:none !important; }
   .reveal,.line{ opacity:1 !important; transform:none !important; }
-  .hr--draw{ transform:none !important; }
   .grain,.cursor,.glow{ display:none !important; }
 </style></noscript>
 
@@ -74,7 +73,6 @@
   </a>
 
   <nav class="nav__links" aria-label="Glavna navigacija">
-    <a href="#story" data-hr="Priča" data-en="Story">Priča</a>
     <a href="#visit" data-hr="Posjet" data-en="Visit">Posjet</a>
   </nav>
 
@@ -117,57 +115,13 @@
     <p class="hero__close reveal" data-delay="760" data-hr="Puštamo je da živi." data-en="We let it live.">Puštamo je da živi.</p>
 
     <div class="hero__cta reveal" data-delay="880">
-      <a class="btn btn-primary btn-lg" href="#story" data-magnetic data-hr="Naš prostor" data-en="Our room">Naš prostor</a>
-      <a class="btn btn-secondary btn-lg" href="#visit" data-hr="Gdje nas naći" data-en="Where to find us">Gdje nas naći</a>
+      <a class="btn btn-primary btn-lg" href="#visit" data-magnetic data-hr="Gdje nas naći" data-en="Where to find us">Gdje nas naći</a>
     </div>
   </div>
 
   <div class="hero__scroll" aria-hidden="true">
     <span class="hero__scrollLine"></span>
     <span data-hr="listaj" data-en="scroll">listaj</span>
-  </div>
-</section>
-
-<!-- ── Marquee ────────────────────────────────────────────── -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track" id="marqueeTrack">
-    <span>Pizza</span><i>—</i><span>Burgeri</span><i>—</i><span>Roštilj</span><i>—</i>
-    <span>Domaći deserti</span><i>—</i><span>Vina malih vinara</span><i>—</i><span>Uskoro otvaramo</span><i>—</i>
-  </div>
-</div>
-
-<!-- ── Story ──────────────────────────────────────────────── -->
-<section class="sec" id="story">
-  <div class="sec__inner story__grid">
-    <figure class="story__figure reveal">
-      <div class="frame" data-tilt>
-        <img src="assets/img/interior-800.webp"
-             srcset="assets/img/interior-800.webp 800w, assets/img/interior-1400.webp 1400w, assets/img/interior.webp 2000w"
-             sizes="(min-width:900px) 46vw, 92vw"
-             width="2000" height="1763" loading="lazy" decoding="async"
-             alt="Blagovaonica restorana Terra: šank s toplim svjetlom, maslina u prostoru i logotip na drvenoj stijeni." />
-        <span class="frame__tag" data-hr="Naš prostor · Čakovec" data-en="Our room · Čakovec">Naš prostor · Čakovec</span>
-      </div>
-    </figure>
-
-    <div>
-      <p class="kicker reveal" data-hr="Priča" data-en="Story">Priča</p>
-      <h2 class="h-lg reveal" data-delay="60"><span data-split-lines
-        data-hr="Sve što serviramo ima adresu."
-        data-en="Everything we serve has an address.">Sve što serviramo ima adresu.</span></h2>
-      <hr class="hr hr--draw" data-delay="120" />
-      <p class="lead reveal" data-delay="160"
-        data-hr="Terra je restoran u kojem se sve radi u kući: tijesto dižemo svako jutro, umake i deserte spremamo sami, a meso i povrće stižu od proizvođača iz Međimurja."
-        data-en="Terra is a restaurant where everything is made in house: we proof the dough every morning, make the sauces and desserts ourselves, and the meat and vegetables come from growers in Međimurje.">
-        Terra je restoran u kojem se sve radi u kući: tijesto dižemo svako jutro, umake i deserte spremamo sami, a meso i povrće stižu od proizvođača iz Međimurja.
-      </p>
-
-      <ul class="facts">
-        <li class="reveal" data-delay="120"><b>48</b><span data-hr="sati dizanja tijesta" data-en="hours of dough proofing">sati dizanja tijesta</span></li>
-        <li class="reveal" data-delay="180"><b>12</b><span data-hr="vrsta pizza na meniju" data-en="pizzas on the menu">vrsta pizza na meniju</span></li>
-        <li class="reveal" data-delay="240"><b>41</b><span data-hr="km do najdaljeg dobavljača" data-en="km to our furthest grower">km do najdaljeg dobavljača</span></li>
-      </ul>
-    </div>
   </div>
 </section>
 

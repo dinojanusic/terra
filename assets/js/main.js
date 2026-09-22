@@ -130,7 +130,7 @@
       }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 })
     : null;
 
-  $$('.reveal, .hr--draw').forEach(el => {
+  $$('.reveal').forEach(el => {
     if (el.closest('.hero')) return;               // the hero waits for the preloader
     if (io) io.observe(el); else el.classList.add('is-in');
   });
@@ -183,7 +183,7 @@
 
     addEventListener('pointermove', e => { p.x = e.clientX; p.y = e.clientY; }, { passive: true });
 
-    const hot = 'a, button, input, .card, [data-tilt]';
+    const hot = 'a, button, input';
     doc.addEventListener('pointerover', e => { if (e.target.closest(hot)) body.classList.add('cursor-hot'); });
     doc.addEventListener('pointerout',  e => { if (e.target.closest(hot)) body.classList.remove('cursor-hot'); });
 
@@ -194,16 +194,6 @@
                             `${(e.clientY - (r.top + r.height / 2)) * 0.22}px)`;
       });
       m.addEventListener('pointerleave', () => { m.style.transform = ''; });
-    });
-
-    $$('[data-tilt]').forEach(t => {
-      t.addEventListener('pointermove', e => {
-        const r = t.getBoundingClientRect();
-        const rx = ((e.clientY - r.top) / r.height - 0.5) * -5;
-        const ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
-        t.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-      });
-      t.addEventListener('pointerleave', () => { t.style.transform = ''; });
     });
 
     const trail = () => {
@@ -254,13 +244,7 @@
   }
 
   /* ---------------------------------------------------------
-     6. Marquee — duplicate the track so the loop is seamless
-     --------------------------------------------------------- */
-  const track = $('#marqueeTrack');
-  if (track) track.innerHTML += track.innerHTML;
-
-  /* ---------------------------------------------------------
-     7. Language toggle (HR / EN)
+     6. Language toggle (HR / EN)
      --------------------------------------------------------- */
   const langBtn = $('#lang');
 
@@ -303,7 +287,7 @@
   });
 
   /* ---------------------------------------------------------
-     8. Odds and ends
+     7. Odds and ends
      --------------------------------------------------------- */
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
