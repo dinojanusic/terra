@@ -11,8 +11,8 @@ assets/
   css/style.css     kit tokens + components, then the page built from them
   js/main.js        preloader, line-split headings, reveals, countdown, i18n
   fonts/            Archivo (variable, 3 subsets) — self-hosted from the kit
-  img/              lockups (paper + reverse), tree marks, interior render
-                    at three widths, favicon, OG card
+  img/              lockups (paper + reverse), tree marks, hero photograph
+                    and interior render at two/three widths, favicon, OG card
 ```
 
 ## Run it
@@ -66,12 +66,17 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
   re-split after fonts load, on resize, and on language change.
 - **Scroll reveals** via `IntersectionObserver` with per-element delays
   (`data-delay="120"`), plus a rule that draws itself in (`.hr--draw`).
-- **Header** that hides on scroll-down and reveals the tree mark once stuck.
+- **Hero** is the room itself: the photograph runs full-bleed behind a scrim
+  that ranges the copy left on wide screens and settles the whole frame on
+  narrow ones, where the crop shifts to keep the lit logo wall in shot. The
+  printed brand text reveals a line at a time.
+- **Header** that hides on scroll-down; the brand shows from the first frame,
+  since the hero no longer carries its own lockup.
 - **Ambient motion on the dark ground** — a canvas film-grain layer, a custom
   cursor with a trailing ring, a warm glow that follows the pointer, magnetic
   buttons and a 3D tilt on the interior photo. All fine-pointer only.
-- **Parallax** on the hero: two ember layers and the lockup drift at different
-  rates from a single rAF scroll loop.
+- **Parallax** on the hero: the photograph and the warm layer drift at
+  different rates from a single rAF scroll loop.
 - **HR / EN toggle**, persisted in `localStorage`.
 - **No date and no email capture** — the opening is announced as "soon", so
   there is no countdown and no form to run, maintain, or comply with.
@@ -92,11 +97,12 @@ same 4px base, hover/active steps for the trunk accent, and `.btn-lg`.
 3. **Photography** — the story section carries the interior render, served as
    `interior-800/1400.webp` plus the 2000px original via `srcset`. Regenerate
    those widths if you replace the source image.
-4. **Menu copy** — the six categories deliberately make no claim about cooking
-   equipment: no oven type, no grill fuel, no fire. Keep it that way unless the
-   kitchen is confirmed. The numbers in the story section (`48 h`, `12`, `41 km`)
-   are still invented — swap them for real ones.
-5. **OG image** — `assets/img/og.png` is generated from the lockup at
+4. **The marquee** under the hero still lists food (pizza, burgeri, roštilj).
+   It is the only food content left now that the category section is gone —
+   say the word and it becomes brand lines instead.
+5. **Story numbers** — `48 h`, `12` and `41 km` are still invented. Swap them
+   for real ones, or drop the block.
+6. **OG image** — `assets/img/og.png` is generated from the lockup at
    1200×630; replace it with a photograph when one exists.
 
 ## Browser support

@@ -139,7 +139,7 @@
      4. Scroll: header state + a slow drift on the lockup
      --------------------------------------------------------- */
   const nav = $('#nav');
-  const heroLogo = $('#heroLogo');
+  const heroBg = $('#heroBg');
   const layers = $$('.hero__layer');
   let lastY = 0;
   let ticking = false;
@@ -153,7 +153,7 @@
     }
 
     if (!reduced && y < innerHeight * 1.2) {
-      if (heroLogo) heroLogo.style.transform = `translate3d(0, ${(y * 0.09).toFixed(2)}px, 0)`;
+      if (heroBg) heroBg.style.transform = `translate3d(0, ${(y * 0.12).toFixed(2)}px, 0) scale(1.06)`;
       layers.forEach(l => {
         const d = parseFloat(l.dataset.depth || 0.1);
         l.style.transform = `translate3d(0, ${(y * d).toFixed(2)}px, 0) scale(${1 + d * 0.06})`;

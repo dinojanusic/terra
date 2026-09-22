@@ -24,7 +24,6 @@
   .loader{ display:none !important; }
   .reveal,.line{ opacity:1 !important; transform:none !important; }
   .hr--draw{ transform:none !important; }
-  .nav__mark,.nav__word{ opacity:1 !important; transform:none !important; }
   .grain,.cursor,.glow{ display:none !important; }
 </style></noscript>
 
@@ -76,7 +75,6 @@
 
   <nav class="nav__links" aria-label="Glavna navigacija">
     <a href="#story" data-hr="Priča" data-en="Story">Priča</a>
-    <a href="#taste" data-hr="Kuhinja" data-en="Kitchen">Kuhinja</a>
     <a href="#visit" data-hr="Posjet" data-en="Visit">Posjet</a>
   </nav>
 
@@ -93,31 +91,34 @@
 <!-- ── Hero ───────────────────────────────────────────────── -->
 <section class="hero" id="hero">
   <div class="hero__ground" aria-hidden="true">
-    <div class="hero__layer hero__layer--wash" data-depth="0.08"></div>
-    <div class="hero__layer hero__layer--warm" data-depth="0.16"></div>
+    <img class="hero__bg" id="heroBg"
+         src="assets/img/hero-1600.webp"
+         srcset="assets/img/hero-1000.webp 1000w, assets/img/hero-1600.webp 1600w"
+         sizes="100vw" width="1647" height="995" fetchpriority="high" alt="" />
+    <div class="hero__scrim"></div>
+    <div class="hero__layer hero__layer--warm" data-depth="0.12"></div>
   </div>
-  <div class="hero__vignette" aria-hidden="true"></div>
 
   <div class="hero__inner">
     <p class="hero__kicker reveal" data-hr="Čakovec · Uskoro otvaramo" data-en="Čakovec · Opening soon">Čakovec · Uskoro otvaramo</p>
 
-    <img class="hero__logo reveal" data-delay="80" id="heroLogo"
-         src="assets/img/terra-logo-reverse.png" width="575" height="404"
-         alt="Terra Restoran" fetchpriority="high" />
+    <h1 class="hero__title reveal" data-delay="80"><span data-split-lines
+      data-hr="Sve počinje uspomenom."
+      data-en="Everything begins with a memory.">Sve počinje uspomenom.</span></h1>
 
-    <h1 class="hero__title reveal" data-delay="200"><span data-split-lines
-      data-hr="Kuhinja koja počinje u tlu."
-      data-en="A kitchen that begins in the soil.">Kuhinja koja počinje u tlu.</span></h1>
+    <div class="hero__verse">
+      <p class="hero__line reveal" data-delay="260" data-hr="Jedan okus." data-en="One taste.">Jedan okus.</p>
+      <p class="hero__line reveal" data-delay="340" data-hr="Jedan miris." data-en="One scent.">Jedan miris.</p>
+      <p class="hero__line reveal" data-delay="420" data-hr="Jedan trenutak koji vrijeme nije izbrisalo." data-en="One moment that time has not erased.">Jedan trenutak koji vrijeme nije izbrisalo.</p>
+      <p class="hero__line hero__line--gap reveal" data-delay="540" data-hr="Iz njega nastaje svako naše jelo." data-en="From it, every dish of ours is born.">Iz njega nastaje svako naše jelo.</p>
+      <p class="hero__line hero__line--gap reveal" data-delay="640" data-hr="Ne čuvamo tradiciju u vitrini." data-en="We do not keep tradition in a display case.">Ne čuvamo tradiciju u vitrini.</p>
+    </div>
 
-    <p class="hero__lede reveal" data-delay="300"
-       data-hr="Pizza, burgeri i jela s roštilja — svježe tijesto svaki dan, meso i povrće od proizvođača iz Međimurja."
-       data-en="Pizza, burgers and food off the grill — fresh dough every day, meat and vegetables from growers in Međimurje.">
-      Pizza, burgeri i jela s roštilja — svježe tijesto svaki dan, meso i povrće od proizvođača iz Međimurja.
-    </p>
+    <p class="hero__close reveal" data-delay="760" data-hr="Puštamo je da živi." data-en="We let it live.">Puštamo je da živi.</p>
 
-    <div class="hero__cta reveal" data-delay="380">
-      <a class="btn btn-primary btn-lg" href="#taste" data-magnetic data-hr="Što spremamo" data-en="What we cook">Što spremamo</a>
-      <a class="btn btn-secondary btn-lg" href="#story" data-hr="Naš prostor" data-en="Our room">Naš prostor</a>
+    <div class="hero__cta reveal" data-delay="880">
+      <a class="btn btn-primary btn-lg" href="#story" data-magnetic data-hr="Naš prostor" data-en="Our room">Naš prostor</a>
+      <a class="btn btn-secondary btn-lg" href="#visit" data-hr="Gdje nas naći" data-en="Where to find us">Gdje nas naći</a>
     </div>
   </div>
 
@@ -167,49 +168,6 @@
         <li class="reveal" data-delay="240"><b>41</b><span data-hr="km do najdaljeg dobavljača" data-en="km to our furthest grower">km do najdaljeg dobavljača</span></li>
       </ul>
     </div>
-  </div>
-</section>
-
-<!-- ── What we cook ───────────────────────────────────────── -->
-<section class="sec" id="taste" style="padding-top:0">
-  <div class="sec__inner">
-    <p class="kicker reveal" data-hr="Kuhinja" data-en="Kitchen">Kuhinja</p>
-    <h2 class="h-lg reveal" data-delay="60"><span data-split-lines
-      data-hr="Ono što spremamo svaki dan."
-      data-en="What we cook, every day.">Ono što spremamo svaki dan.</span></h2>
-
-    <ul class="cards">
-      <li class="card elev-sm reveal">
-        <span class="card-kicker" data-hr="Svaki dan svježe" data-en="Fresh every day">Svaki dan svježe</span>
-        <h3 class="card-title" data-hr="Pizza" data-en="Pizza">Pizza</h3>
-        <p class="card-body" data-hr="Tijesto koje se diže 48 sati, tanko i hrskavo. Klasici i sezonski dodaci." data-en="A dough that proofs for 48 hours, thin and crisp. Classics and seasonal toppings.">Tijesto koje se diže 48 sati, tanko i hrskavo. Klasici i sezonski dodaci.</p>
-      </li>
-      <li class="card elev-sm reveal" data-delay="60">
-        <span class="card-kicker" data-hr="Domaće pecivo" data-en="House buns">Domaće pecivo</span>
-        <h3 class="card-title" data-hr="Burgeri" data-en="Burgers">Burgeri</h3>
-        <p class="card-body" data-hr="Mljeveno meso s roštilja, pecivo iz naše kuhinje, umaci rađeni u kući." data-en="Grilled patties, buns from our own kitchen, sauces made in house.">Mljeveno meso s roštilja, pecivo iz naše kuhinje, umaci rađeni u kući.</p>
-      </li>
-      <li class="card elev-sm reveal" data-delay="120">
-        <span class="card-kicker" data-hr="Meso i rebra" data-en="Meat &amp; ribs">Meso i rebra</span>
-        <h3 class="card-title" data-hr="Roštilj i BBQ" data-en="Grill &amp; BBQ">Roštilj i BBQ</h3>
-        <p class="card-body" data-hr="Rebra, vratina i ćevapi — polako pečeni, uz prilog po izboru." data-en="Ribs, pork neck and ćevapi — cooked slow, with the side you choose.">Rebra, vratina i ćevapi — polako pečeni, uz prilog po izboru.</p>
-      </li>
-      <li class="card elev-sm reveal" data-delay="180">
-        <span class="card-kicker" data-hr="Iz Međimurja" data-en="From Međimurje">Iz Međimurja</span>
-        <h3 class="card-title" data-hr="Salate i prilozi" data-en="Salads &amp; sides">Salate i prilozi</h3>
-        <p class="card-body" data-hr="Povrće od susjednih uzgajivača — svježe u salati ili pečeno kao prilog." data-en="Vegetables from growers next door — fresh in a salad or roasted as a side.">Povrće od susjednih uzgajivača — svježe u salati ili pečeno kao prilog.</p>
-      </li>
-      <li class="card elev-sm reveal" data-delay="240">
-        <span class="card-kicker" data-hr="Domaće" data-en="House-made">Domaće</span>
-        <h3 class="card-title" data-hr="Deserti" data-en="Desserts">Deserti</h3>
-        <p class="card-body" data-hr="Štrudla, palačinke i sladoled — sve iz naše kuhinje, ništa kupljeno." data-en="Strudel, pancakes and ice cream — all from our kitchen, nothing bought in.">Štrudla, palačinke i sladoled — sve iz naše kuhinje, ništa kupljeno.</p>
-      </li>
-      <li class="card elev-sm reveal" data-delay="300">
-        <span class="card-kicker" data-hr="Za stolom" data-en="At the table">Za stolom</span>
-        <h3 class="card-title" data-hr="Piće i vino" data-en="Drinks &amp; wine">Piće i vino</h3>
-        <p class="card-body" data-hr="Točeno pivo, vina malih međimurskih vinara i sokovi cijeđeni na licu mjesta." data-en="Beer on tap, wine from small Međimurje growers and juice pressed on the spot.">Točeno pivo, vina malih međimurskih vinara i sokovi cijeđeni na licu mjesta.</p>
-      </li>
-    </ul>
   </div>
 </section>
 

@@ -266,14 +266,11 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
 .nav.is-hidden{ transform:translateY(-102%); }
 
 .nav__brand{ display:flex; align-items:center; gap:var(--space-2); color:inherit; text-decoration:none; }
-.nav__mark{ width:30px; height:auto; opacity:0; transform:translateY(-6px); transition:opacity .4s var(--ease), transform .4s var(--ease); }
-.nav.is-stuck .nav__mark{ opacity:1; transform:none; }
+.nav__mark{ width:30px; height:auto; }
 .nav__word{
   font-family:var(--font-heading); font-weight:var(--font-heading-weight);
   font-size:13px; letter-spacing:.22em; text-transform:uppercase;
-  opacity:0; transform:translateY(-6px); transition:opacity .4s var(--ease) .05s, transform .4s var(--ease) .05s;
 }
-.nav.is-stuck .nav__word{ opacity:1; transform:none; }
 
 .nav__links{ display:none; gap:var(--space-8); font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
 .nav__links a{ color:var(--color-text); text-decoration:none; position:relative; padding-block:2px; }
@@ -299,53 +296,64 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
 
 .hero{
   position:relative; min-height:100svh;
-  display:grid; align-content:center; justify-items:center; text-align:center;
-  padding:clamp(88px,13vh,120px) var(--gut) var(--space-16);
+  display:grid; align-content:center; justify-items:start; text-align:left;
+  padding:clamp(96px,14vh,132px) var(--gut) var(--space-24);
   overflow:hidden;
 }
-/* Warm light rising off the floor, the way the room's lighting does in the
-   render — not a fire. Two parallax layers: a slow wash and a soft pulse. */
-.hero__ground{ position:absolute; inset:-8% -4% 0; z-index:0; pointer-events:none; }
-.hero__layer{ position:absolute; inset:0; will-change:transform; }
-.hero__layer--wash{
+
+/* The room itself carries the section; the scrim keeps the type legible and
+   the warm layer picks up the light already in the photograph. */
+.hero__ground{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.hero__bg{
+  width:100%; height:100%; object-fit:cover; object-position:center right;
+  /* the same scale the scroll loop keeps it at, so nothing jumps on first
+     scroll and the drift never exposes an edge */
+  transform:scale(1.06); will-change:transform;
+}
+.hero__scrim{
+  position:absolute; inset:0;
   background:
-    radial-gradient(120% 85% at 50% 104%, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 60%),
-    radial-gradient(80% 60% at 14% 96%, color-mix(in srgb, var(--terra-canopy) 16%, transparent) 0%, transparent 58%),
-    linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--terra-ground) 70%, transparent) 100%);
+    linear-gradient(90deg, color-mix(in srgb, var(--color-bg) 88%, transparent) 0%,
+                           color-mix(in srgb, var(--color-bg) 70%, transparent) 40%,
+                           color-mix(in srgb, var(--color-bg) 16%, transparent) 72%,
+                           color-mix(in srgb, var(--color-bg) 26%, transparent) 100%),
+    linear-gradient(0deg, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 42%, transparent) 15%, transparent 46%);
 }
+.hero__layer{ position:absolute; inset:0; will-change:transform; }
 .hero__layer--warm{
-  background:radial-gradient(42% 30% at 50% 100%, color-mix(in srgb, var(--color-accent-600) 30%, transparent) 0%,
-                                                  color-mix(in srgb, var(--color-accent) 8%, transparent) 45%, transparent 72%);
-  filter:blur(6px); animation:warmPulse 7s ease-in-out infinite;
+  background:radial-gradient(46% 34% at 22% 100%, color-mix(in srgb, var(--color-accent) 20%, transparent) 0%, transparent 70%);
+  animation:warmPulse 7s ease-in-out infinite;
 }
-@keyframes warmPulse{ 0%,100%{opacity:.75; transform:scale(1);} 50%{opacity:1; transform:scale(1.05);} }
-.hero__vignette{
-  position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(78% 72% at 50% 44%, transparent 44%, color-mix(in srgb, #000 55%, transparent) 100%);
-}
-.hero__inner{ position:relative; z-index:1; max-width:1180px; width:100%; display:grid; justify-items:center; }
+@keyframes warmPulse{ 0%,100%{opacity:.7;} 50%{opacity:1;} }
+
+.hero__inner{ position:relative; z-index:1; max-width:1180px; width:100%; margin-inline:auto; }
 
 .hero__kicker{
   font-size:12px; letter-spacing:.24em; text-transform:uppercase;
   color:var(--color-accent); margin-bottom:var(--space-6);
   font-family:var(--font-heading); font-weight:600;
 }
-.hero__logo{
-  width:clamp(200px, 26vw, 320px); height:auto; margin-bottom:var(--space-6);
-  will-change:transform;
-}
-.hero__logo.reveal{ transform:translateY(18px) scale(.97); }
-.hero__logo.reveal.is-in{ transform:none; }
 
 .hero__title{
   font-size:var(--font-display); letter-spacing:-.03em; line-height:1.02;
-  max-width:16ch; margin:0 0 var(--space-4); text-wrap:balance;
+  max-width:16ch; margin:0 0 var(--space-8); text-wrap:balance;
 }
-.hero__lede{
-  font-size:clamp(15px,1.5vw,18px); max-width:56ch; margin:0 auto var(--space-6);
-  color:color-mix(in srgb, var(--color-text) 70%, transparent); text-wrap:pretty;
+
+/* The printed lines keep their own rhythm: one thought per line. */
+.hero__verse{ margin:0 0 var(--space-6); }
+.hero__line{
+  margin:0; font-size:clamp(16px,1.7vw,21px); line-height:1.5;
+  color:color-mix(in srgb, var(--color-text) 78%, transparent);
+  max-width:44ch; text-wrap:pretty;
 }
-.hero__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); justify-content:center; }
+.hero__line--gap{ margin-top:var(--space-4); }
+.hero__close{
+  font-family:var(--font-heading); font-weight:var(--font-heading-weight);
+  font-size:clamp(19px,2.3vw,29px); letter-spacing:-.015em;
+  margin:0 0 var(--space-8); color:var(--color-text);
+}
+
+.hero__cta{ display:flex; flex-wrap:wrap; gap:var(--space-3); }
 
 .hero__scroll{
   position:absolute; left:50%; bottom:var(--space-6); transform:translateX(-50%);
@@ -357,6 +365,21 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
 .hero__scrollLine{ width:1px; height:44px; background:var(--color-divider); position:relative; overflow:hidden; }
 .hero__scrollLine::after{ content:""; position:absolute; inset:0; background:var(--color-accent); animation:scrollRun 2.2s var(--ease) infinite; }
 @keyframes scrollRun{ 0%{transform:translateY(-100%);} 60%,100%{transform:translateY(100%);} }
+
+/* On a narrow frame the copy spans the full width, so the scrim stops being a
+   left-to-right split and simply settles the whole picture; the crop shifts to
+   keep the logo wall in shot. */
+@media (max-width:699px){
+  .hero__bg{ object-position:64% center; }
+  .hero__scrim{
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-bg) 72%, transparent) 0%,
+                              color-mix(in srgb, var(--color-bg) 58%, transparent) 40%,
+                              color-mix(in srgb, var(--color-bg) 78%, transparent) 78%,
+                              var(--color-bg) 100%),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-bg) 45%, transparent) 0%, transparent 72%);
+  }
+}
 
 /* ── Marquee ──────────────────────────────────────────────── */
 
@@ -481,7 +504,6 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
 /* Below 600px the header has no CTA to anchor it, so the brand shows from
    the start rather than waiting for the scrolled state. */
 @media (max-width:599px){
-  .nav__mark,.nav__word{ opacity:1; transform:none; }
   .cursor,.glow,.grain{ display:none; }
 }
 @media (min-width:600px){
@@ -503,5 +525,4 @@ body.cursor-hot .cursor__ring{ width:56px; height:56px; border-color:var(--color
   }
   .reveal,.line{ opacity:1; transform:none; }
   .hr--draw{ transform:none; }
-  .nav__mark,.nav__word{ opacity:1; transform:none; }
 }
