@@ -96,10 +96,10 @@ where and who, and nothing it cannot yet stand behind.
    kicker, the header tag, and `<section id="opening">`. If you later want a
    countdown or an email signup back, both are in the git history on this
    branch (commit "Run the kit's dark theme…") and can be lifted straight out.
-2. **Contact details** — the street (Planinarski put, Čakovec) and the Instagram
-   and Facebook links are real. The house number, phone and email are still
-   placeholders, as are the hours; they live in the footer and in the JSON-LD
-   block in `<head>`.
+2. **Contact details** — the street (Planinarski put, Čakovec), the phone, the
+   email, the hours and the Instagram and Facebook links are real. Only the
+   house number is still missing; everything lives in the footer and in the
+   JSON-LD block in `<head>`.
 3. **Photography** — the story section carries the interior render, served as
    `interior-800/1400.webp` plus the 2000px original via `srcset`. Regenerate
    those widths if you replace the source image.
