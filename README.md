@@ -15,6 +15,22 @@ assets/
                     at two widths, favicon, OG card
 ```
 
+## Deploy
+
+`.github/workflows/deploy.yml` publishes the site to the **`gh-pages`** branch
+on every push to the default branch. That branch is a plain copy of the site
+(no README, no workflow, plus a `.nojekyll` so files are served as they are).
+
+Pages itself still has to be switched on once, by hand, in
+**Settings → Pages → Source → Deploy from a branch → `gh-pages` / `(root)`**.
+The Actions token is allowed to push the branch but not to create the Pages
+site, so that first switch belongs to the repository owner. Once it is on,
+every push publishes automatically and nothing further is needed.
+
+The site then serves from `https://dinojanusic.github.io/terra/`. All asset
+paths are relative, so the `/terra/` sub-path works without configuration; a
+custom domain later needs only a `CNAME` file in the published branch.
+
 ## Run it
 
 ```bash
