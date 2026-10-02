@@ -1,41 +1,39 @@
 name: Deploy to GitHub Pages
 
-# The site is static and lives at the repository root, so a deploy is just
-# uploading the checkout. configure-pages turns Pages on the first time it runs.
+# The Actions token may create deployments but not the Pages site itself, so
+# this publishes to a gh-pages branch instead of using the Pages API. GitHub
+# serves that branch for public repositories.
 on:
   push:
     branches: [claude/terra-restoran-landing-ay3lzt]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out the site
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload the site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish to gh-pages
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          site="$(mktemp -d)"
+          rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' ./ "$site/"
+          touch "$site/.nojekyll"          # serve the files as they are, no Jekyll pass
+          cd "$site"
+          git init -q -b gh-pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Publish ${GITHUB_SHA::7}"
+          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}" gh-pages
